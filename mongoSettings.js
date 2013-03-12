@@ -1,5 +1,5 @@
 module.exports = {
     cookieSecret: 'easyCRM',
-    db: 'easycrm',
+    db: 'easycrm' ,
     host: 'localhost'
 };
