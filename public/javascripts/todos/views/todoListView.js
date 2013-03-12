@@ -3,7 +3,7 @@ var app = app || {};
 $(function() {
 	'use strict';
 
-	// Todo Item View
+	// 任务列表视图
 	// --------------
 
 	// The DOM element for a todo item...
@@ -35,7 +35,7 @@ $(function() {
 
 		// Re-render the titles of the todo item.
 		render: function() {
-            console.log(this.model);
+            console.log('render',this.model);
 			this.$el.html(Mustache.to_html(this.template,this.model.toJSON()));
 //			this.$el.html( this.template( this.model.toJSON() ) );
 			this.$el.toggleClass( 'completed', this.model.get('completed') );
@@ -57,7 +57,7 @@ $(function() {
 			);
 		},
 
-		// Toggle the `"completed"` state of the model.
+		// 切换完成状态
 		togglecompleted: function() {
 			this.model.toggle();
 		},
@@ -73,6 +73,7 @@ $(function() {
 			var value = this.input.val().trim();
 
 			if ( value ) {
+                // 保存修改
 				this.model.save({ title: value });
 			} else {
 				this.clear();
