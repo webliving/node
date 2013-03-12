@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link href="/javascripts/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!--<link href="/javascripts/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />-->
+    <link rel='stylesheet' href='/stylesheets/layout.css'/>
+    <script src="/javascripts/lib/jquery/jquery-1.9.0.min.js"></script>
+    <script src="/javascripts/lib/bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <a class="brand" href="/" style="color:White">EasyCRM</a>
+
+        <ul class="nav">
+            <li><a href="/">客户</a></li>
+
+            <li><a href="/contact">联系人</a></li>
+
+        </ul>
+        <form action="/site/search" class="navbar-search pull-left" method="get" novalidate="novalidate"><input class="search-query" id="query" name="query" onchange="javascript:submit();" placeholder="输入客户或联系人" type="text" value=""></form>
+        <ul class="nav pull-right">
+            <% if (!user) { %>
+            <li><a href="/login">登入</a></li>
+            <li><a href="/reg">註冊</a></li>
+            <% } else { %>
+            <li><a href="#">欢迎您：<%= user.name %></a></li>
+            <li><a href="/logout">退出</a></li>
+            <% } %>
+            <li><a href="/setting">设置</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div id="container" class="container">
+    <% if (success) { %>
+    <div class="alert alert-success">
+        <%= success %>
+    </div>
+    <% } %>
+    <% if (error) { %>
+    <div class="alert alert-error">
+        <%= error %>
+    </div>
+    <% } %>
+
+    <%- body %>
+    <hr/>
+    <footer>
+        <p><a href="http://www.byvoid.com/" target="_blank">BYVoid</a> 2012</p>
+    </footer>
+</div>
+</body>
+</html>

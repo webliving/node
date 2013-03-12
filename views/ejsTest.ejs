@@ -1,0 +1,26 @@
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+
+<div id="supply_list"></div>
+
+<button id="update">更新</button>
+
+<script src="/javascripts/lib/ejs/ejs_production.js"></script>
+
+<!--<script data-main="/javascripts/page/main" src="/javascripts/lib/require/require.js"></script>-->
+
+<script>
+
+    var my_supplies2 = {supplies:['100', '200', '300']};
+    var result = new EJS({url:'/template/test.ejs'}).render({supplies:['mop', 'broom', 'duster']});
+
+    document.getElementById('supply_list').innerHTML = result;
+
+    // 更新
+    document.getElementById('update').addEventListener('click', function () {
+       var b=new EJS({url:'/template/test.ejs'}).update('supply_list', '/javascripts/json/test.json');
+//        console.log(b);
+    });
+
+
+</script>

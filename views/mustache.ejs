@@ -1,0 +1,124 @@
+<!--<script src="/javascripts/lib/socket.io/socket.io.min.js"></script>-->
+<!--<script src="/javascripts/page/backboneSync.js"></script>-->
+<script src="/javascripts/lib/mustache/mustache.js"></script>
+
+<script type="text/html" id="ul-template">
+    <ul id="list">
+        {{> li_templ}}
+    </ul>
+</script>
+
+<script type="text/html" id="ul-template2">
+    <div id="list2">
+        {{> li_templ}}
+    </div>
+</script>
+
+<script type="text/html" id="li_templ">
+    <p>{{ name }}</p>
+</script>
+
+<div id="sectionDiv">
+
+</div>
+
+<script>
+    var data_section= {
+        name:'ttt'
+    };
+    var section_temp =document.getElementById('ul-template').innerHTML;
+    var partial ={li_templ:document.getElementById('li_templ').innerHTML};
+    var section_html= Mustache.to_html(section_temp ,data_section,partial);
+
+    document.getElementById('sectionDiv').innerHTML=section_html;
+
+</script>
+
+<!--测试 1 -->
+<script id="Mustache" type="text/tmpl">
+    <h1>{{&header}}</h1>
+    {{#bug}}
+    {{/bug}}
+
+    {{#items}}
+    {{#first}}
+    <li><strong>{{name}}</strong></li>
+    {{/first}}
+    {{#link}}
+    <li><a href="{{url}}">{{name}}</a></li>
+    {{/link}}
+    {{/items}}
+
+    {{#empty}}
+    <p>The list is empty.</p>
+    {{/empty}}
+</script>
+<div id="MustacheBox"></div>
+
+<script>
+
+    var view = {
+        "header":"<strong>Mustache</strong>",
+        "items":[
+            {"name":"red", "first":true, "url":"#Red"},
+            {"name":"green", "link":true, "url":"#Green"},
+            {"name":"blue", "link":true, "url":"#Blue"}
+        ],
+        "empty":true
+    };
+
+    var template = document.getElementById('Mustache').innerHTML;
+
+    var html = Mustache.to_html(template, view);
+    document.getElementById('MustacheBox').innerHTML = html;
+
+</script>
+
+
+<!--测试 2 -->
+<script id="section2" type="text/tmpl">
+    Shown.
+    {{#nothin}}
+    shown!
+    {{/nothin}}
+
+    {{^nothin}}
+    {{! ignore me }}
+    Never shown!
+    {{/nothin}}
+</script>
+
+<div id="nothin">
+
+</div>
+
+<script>
+    var data_section= {
+        "nothin":'false'
+    };
+    var section_temp =document.getElementById('section2').innerHTML;
+    var section_html= Mustache.to_html(section_temp ,data_section);
+    document.getElementById('nothin').innerHTML=section_html;
+</script>
+
+
+<!--测试 sectionFunTmpl -->
+<script id="sectionFunTmpl" type="text/tmpl">
+    {{#bold}}Hi {{name}}.{{/bold}}
+</script>
+
+<div id="sectionFun"></div>
+
+<script>
+    var stooges = {
+        "name": "Tater",
+        "bold": function () {
+            return function (text, render) {
+                return "<b>" + render(text) + "</b>";
+            }
+        }
+    };
+    var template2 = document.getElementById('sectionFunTmpl').innerHTML;
+    var html2 = Mustache.to_html(template2, stooges);
+    document.getElementById('sectionFun').innerHTML = html2;
+</script>
