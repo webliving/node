@@ -176,8 +176,8 @@ Todos.getList = function getList(username, callback) {
             }
 
 
-//          collection.find(query).sort({time: -1}).toArray(function(err, docs) {
-            collection.find(query).toArray(function(err, docs) {
+//            collection.find(query).sort({_id: -1}).toArray(function(err, docs) {
+            collection.find(query).sort({_id: -1}).limit(10).toArray(function(err, docs) {
                 mongodb.close();
                 if (err) {
                     callback(err, null);

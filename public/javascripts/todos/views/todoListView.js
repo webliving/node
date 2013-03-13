@@ -70,6 +70,7 @@ $(function() {
 
 		// Close the `"editing"` mode, saving changes to the todo.
 		close: function() {
+
 			var value = this.input.val().trim();
 
 			if ( value ) {
@@ -85,7 +86,8 @@ $(function() {
 		// If you hit `enter`, we're through editing the item.
 		updateOnEnter: function( e ) {
 			if ( e.which === ENTER_KEY ) {
-				this.close();
+                $(e.target).blur();
+//				this.close();
 			}
 		},
 
