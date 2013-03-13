@@ -5,20 +5,63 @@
 
 <button id="update">更新</button>
 
+<script type="text/tmpl" id="ejsT">
+    <div>
+        [%= title %]
+        [% if (title=='埃及') { %]
+        <span>非洲国家</span>
+        [% } %]
+    </div>
+</script>
+
+<script type="text/tmpl" id="rrr">
+    [%= form_tag('/') %]
+    [%= input_field_tag('cleaning_supply') %]
+    [%= submit_tag('Submit') %]
+    [%= form_tag_end() %]
+</script>
+<script src="/javascripts/lib/jquery/jquery-1.9.0.min.js"></script>
 <script src="/javascripts/lib/ejs/ejs_production.js"></script>
+<script src="/javascripts/page/test.js"></script>
 
 <!--<script data-main="/javascripts/page/main" src="/javascripts/lib/require/require.js"></script>-->
 
 <script>
-
     var my_supplies2 = {supplies:['100', '200', '300']};
-    var result = new EJS({url:'/template/test.ejs'}).render({supplies:['mop', 'broom', 'duster']});
 
-    document.getElementById('supply_list').innerHTML = result;
+    $.getJSON('/javascripts/json/test.json',{name:'web',age:30},function(data){
+//        console.log(data);
+    });
+
+    var oEJS=new EJS({element:'ejsT'});
+    $.getJSON('/book/search',{name:'web',age:30},function(data){
+//        console.log(data);
+        var result2='';
+        $.each(data,function(index,oValue){
+
+            result2+= oEJS.render(oValue);
+
+        });
+
+        document.getElementById('supply_list').innerHTML = result2;
+    });
+
+
+
+
+
+
+//    var result = new EJS({url:'/template/test.ejs'}).render({supplies:['mop', 'broom', 'duster']});
+//    document.getElementById('supply_list').innerHTML = result;
+
+
 
     // 更新
     document.getElementById('update').addEventListener('click', function () {
-       var b=new EJS({url:'/template/test.ejs'}).update('supply_list', '/javascripts/json/test.json');
+//       var b=new EJS({url:'/template/test.ejs'}).update('supply_list', '/javascripts/json/test.json');
+       var b=new EJS({url:'/template/test.ejs'}).update('supply_list', {
+           "supplies":["100", "200", "300"]
+       });
 //        console.log(b);
     });
 
