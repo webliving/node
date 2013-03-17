@@ -15,14 +15,10 @@
     </section>
     <footer id="footer"></footer>
 </section>
-<div id="info">
-    <p>Double-click to edit a todo</p>
-    <p>Written by <a href="https://github.com/addyosmani">Addy Osmani</a></p>
-    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-</div>
+
 <script type="text/template" id="item-template">
     <div class="view">
-        <input class="toggle" type="checkbox" {{#completed}}'checked'{{/completed}}{{^completed}}''{{/completed}} />
+        <input class="toggle" type="checkbox" {{#completed}}checked{{/completed}}{{^completed}}{{/completed}} />
         <label>{{&title}}</label>
         <button class="destroy"></button>
     </div>
@@ -49,6 +45,7 @@
 
 <script src="/javascripts/lib/jquery/jquery-1.9.0.min.js"></script>
 <script src="/javascripts/lib/underscore/underscore-min.js"></script>
+<!--<script src="/javascripts/lib/backbone/backbone-0.9.2.js"></script>-->
 <script src="/javascripts/lib/backbone/backbone-0.9.10.js"></script>
 <!--<script src="/javascripts/lib/backbone/backbone-localstorage.js"></script>-->
 <script src="/javascripts/lib/mustache/mustache.js"></script>

@@ -31,11 +31,16 @@ $(function() {
 			this.model.on( 'change', this.render, this );
 			this.model.on( 'destroy', this.remove, this );
 			this.model.on( 'visible', this.toggleVisible, this );
+            // 0.9.10
+			this.model.on( 'invalid', function(){console.log('invalid');}, this );
+            // 0.9.2
+			this.model.on( 'error', function(model,error){console.log(error);return false}, this );
 		},
 
 		// Re-render the titles of the todo item.
 		render: function() {
-            console.log('render',this.model);
+
+//            console.log('render',this.model);
 			this.$el.html(Mustache.to_html(this.template,this.model.toJSON()));
 //			this.$el.html( this.template( this.model.toJSON() ) );
 			this.$el.toggleClass( 'completed', this.model.get('completed') );
@@ -58,7 +63,8 @@ $(function() {
 		},
 
 		// 切换完成状态
-		togglecompleted: function() {
+		togglecompleted: function(e) {
+
 			this.model.toggle();
 		},
 
@@ -68,15 +74,22 @@ $(function() {
 			this.input.focus();
 		},
 
-		// Close the `"editing"` mode, saving changes to the todo.
+		// Close the `"editing"` mode, saving changes to the todos.
 		close: function() {
 
-			var value = this.input.val().trim();
+			var value = this.input.val().trim(),
+                bIsChange=this.model.hasChanged();
 
-			if ( value ) {
+			if ( value!=this.model.get('title')) {
                 // 保存修改
-				this.model.save({ title: value });
-			} else {
+				this.model.save(
+                    { title: value }
+                    ,{
+                        //wait: true // 控制只有在服务器返回成功之后（响应状态码为200），才将模型对象添加到集合中
+                    }
+                );
+			} else if(!value) {
+                // 删除列表
 				this.clear();
 			}
 

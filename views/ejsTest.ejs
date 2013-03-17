@@ -7,10 +7,10 @@
 
 <script type="text/tmpl" id="ejsT">
     <div>
-        [%= title %]
-        [% if (title=='埃及') { %]
+       {{= title }}
+        {{ if (title=='埃及') { }}
         <span>非洲国家</span>
-        [% } %]
+        {{ } }}
     </div>
 </script>
 
@@ -21,25 +21,29 @@
     [%= form_tag_end() %]
 </script>
 <script src="/javascripts/lib/jquery/jquery-1.9.0.min.js"></script>
-<script src="/javascripts/lib/ejs/ejs_production.js"></script>
+<!--<script src="/javascripts/lib/ejs/ejs_production.js"></script>-->
+<script src="/javascripts/lib/ejs/ejs.min.js"></script>
 <script src="/javascripts/page/test.js"></script>
 
 <!--<script data-main="/javascripts/page/main" src="/javascripts/lib/require/require.js"></script>-->
 
 <script>
+    ejs.open = "{{";
+    ejs.close = "}}";
     var my_supplies2 = {supplies:['100', '200', '300']};
 
     $.getJSON('/javascripts/json/test.json',{name:'web',age:30},function(data){
 //        console.log(data);
     });
 
-    var oEJS=new EJS({element:'ejsT'});
+//    var oEJS=new EJS({element:'ejsT'});
+    var sTmpl=document.getElementById('ejsT').innerHTML;
     $.getJSON('/book/search',{name:'web',age:30},function(data){
 //        console.log(data);
         var result2='';
         $.each(data,function(index,oValue){
 
-            result2+= oEJS.render(oValue);
+            result2+= ejs.render(sTmpl,oValue);
 
         });
 
