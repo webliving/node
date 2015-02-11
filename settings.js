@@ -4,5 +4,5 @@ module.exports = {
     port:3306,
     db:'nodejs_mysql_test',
     user:'root',
-    password:'123456'
+    password:'123456789'
 };
