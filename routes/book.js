@@ -7,7 +7,7 @@ var User = require('../models/user.js');
 //创建book :post /book
 exports.createBook = function(req, res){
     console.log(req.param('name'));
-    var result={_id:125485};
+    var result={_id:125485212};
     res.send(result);
 };
 
