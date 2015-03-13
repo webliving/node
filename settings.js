@@ -3,6 +3,6 @@ module.exports = {
     host:'localhost',
     port:3306,
     db:'nodejs_mysql_test',
-    user:'root',
-    password:'1010'
+    user:'rootTTT',
+    password:'1010QQQQQ'
 };
