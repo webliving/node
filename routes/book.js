@@ -15,7 +15,7 @@ exports.createBook = function(req, res){
 //读取book :get /book/:id
 exports.readBook = function(req, res){
     var id=req.param('id');
-
+    var test = 300;
     res.send([
         {id:1,name:'HTML'},
         {id:2,name:'css'}
